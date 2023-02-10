@@ -30,9 +30,10 @@
                         :key="item.title"
                         active-class="secondary white--text"
                         :to="item.path"
+
                     >
-                        <v-list-item-action><v-icon v-text="item.icon"></v-icon></v-list-item-action>
-                        <v-list-item-content>
+                        <v-list-item-action><v-icon v-text="item.icon" right></v-icon></v-list-item-action>
+                        <v-list-item-content class="text-right align-self-start">
                             <v-list-item-title v-text="item.title"></v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
@@ -63,8 +64,8 @@ export default {
     data() {
         return {
             navList: [{
-                title: '插件指南',
-                icon: 'mdi-speedometer',
+                title: '个人信息',
+                icon: 'mdi-account-box',
                 group: '/plugin',
                 items: [{
                     title: 'prism 安装',
