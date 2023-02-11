@@ -4,7 +4,7 @@
             <v-toolbar-title>
                 <v-avatar tile>
                     <v-icon size="40" style="transform: rotate(180deg)">mdi-android-auto</v-icon>
-                </v-avatar> Vuetify-Admin
+                </v-avatar> JobHelp
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>

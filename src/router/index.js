@@ -18,7 +18,7 @@ const router = new Router({
             path: '/plugin/prism',
             name: 'Prism',
             component: () => import('@/views/plugin/prism'),
-            meta: '使用Prismjs'
+            meta: '搜索'
         }, {
             path: '/plugin/icons',
             name: 'Icons',
@@ -28,7 +28,7 @@ const router = new Router({
             path: '/bulb/motion',
             name: 'Motion',
             component: () => import('@/views/bulb/motion'),
-            meta: '转场动画'
+            meta: '个人信息'
         }]
     }, {
         path: '*',
