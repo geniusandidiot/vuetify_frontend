@@ -37,8 +37,13 @@
           :items="desserts"
           :search="search"
           item-value="name"
-          class="elevation-1"
-        ></v-data-table>
+          class="elevation-1">
+        <template #item.url="{ item }">
+          <a target="_blank" :href="item.url">
+            {{ item.url }}
+          </a>
+        </template>
+        </v-data-table>
       </v-col>
       <v-col cols="12" md="10" class="mb-md-4 mb-sm-3 mb-2">
         <pre data-language="js"><code class="language-js">
@@ -82,15 +87,6 @@
           <li><code>show-language</code> 在代码块中显示语言标签（内联代码不显示标签）</li>
           <li><code>normalize-whitespace</code> 自动排版格式化，相当好用，解救强迫症</li>
         </ul>
-        </p>
-        <p>更多配置请转到：
-          <a class="mr-4 secondary--text" href="https://prismjs.com/#plugins" target="_blank">prism-plugins
-            <v-icon color="secondary" size="16">mdi-open-in-new</v-icon>
-          </a>
-          <a class="secondary--text" href="https://prismjs.com/#supported-languages" target="_blank">prism-languages
-            <v-icon color="secondary" size="16">mdi-open-in-new</v-icon>
-          </a>
-        </p>
         <p>在 babel.config.js 文件中配置</p>
         <pre data-language="js"><code class="language-js">
                     // babel.config.js
@@ -251,6 +247,7 @@ export default {
   methods: {
     getScrapeInfo: function (jobName) {
       var url = "127.0.0.1/scrape/?"+jobName
+      url
     }
   }
 }
