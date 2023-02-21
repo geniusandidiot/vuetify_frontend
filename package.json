@@ -3,19 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
+    "echarts": "^5.4.1",
     "prismjs": "^1.19.0",
     "screenfull": "^5.0.2",
     "vue": "^2.6.10",
     "vue-clipboard2": "^0.3.1",
+    "vue-echarts": "^6.5.4",
     "vue-router": "^3.1.5",
     "vuelidate": "^0.7.5",
     "vuetify": "^2.2.12",
@@ -50,10 +49,6 @@
     "parserOptions": {
       "parser": "babel-eslint"
     }
-  },
-  "scripts": {
-    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "vue-cli-service build"
   },
   "browserslist": [
     "> 1%",
