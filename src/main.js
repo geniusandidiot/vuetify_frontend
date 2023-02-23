@@ -6,13 +6,13 @@ import store from './store'
 import axios from 'axios'
 import VueClipboard from 'vue-clipboard2'
 import motion from './plugins/motion'
-// 导入echarts
-//import ECharts from 'vue-echarts';
-// echarts-gl中包含所有图标需要的依赖模块
-//import 'echarts-gl';
+
+import 'echarts'
+import ECharts from 'vue-echarts'
+Vue.component('v-chart', ECharts);
 
 axios.defaults.withCredentials = true
-
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 Vue.prototype.console = window.console

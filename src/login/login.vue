@@ -4,7 +4,7 @@
             <v-toolbar-title>
                 <v-avatar tile>
                     <v-icon size="40" style="transform: rotate(180deg)">mdi-android-auto</v-icon>
-                </v-avatar> Vuetify-Admin
+                </v-avatar> JobHelp
             </v-toolbar-title>
         </v-app-bar>
         <v-content class="accent">
@@ -90,14 +90,14 @@ export default {
         accountErrors() {
             const err = [];
             if (!this.$v.account.$dirty) return err;
-            !this.$v.account.required && err.push('账号还没填呢')
-            !this.$v.account.maxLength && err.push('账号太长了')
+            !this.$v.account.required && err.push('请填写账号')
+            !this.$v.account.maxLength && err.push('账号长度不能大于30')
             return err
         },
         passwordErrors() {
             const err = [];
             if(!this.$v.password.$dirty) return err;
-            !this.$v.password.required && err.push('密码还没填呢')
+            !this.$v.password.required && err.push('密码不能为空')
             return err
         }
     },
@@ -108,7 +108,7 @@ export default {
                 this.loading = true
                 setTimeout(() => {
                     this.loading = false
-                    this.$router.push('/home')
+                    this.$router.push('/plugin/prism')
                 }, 1500);
             }
         }

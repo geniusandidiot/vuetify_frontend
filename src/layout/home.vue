@@ -55,7 +55,7 @@
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
-            
+
         </v-content>
         <v-navigation-drawer width="300" v-model="setting" overlay-opacity="0" floating temporary right app>
             <v-sheet class="ma-4" color="transparent">

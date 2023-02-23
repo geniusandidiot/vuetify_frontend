@@ -3,6 +3,7 @@
 
     <v-row justify="center" no-gutters>
 
+<!--      搜索栏-->
       <v-col cols="12" md="10" class="mb-md-4 mb-sm-3 mb-2">
         <v-alert
             color="secondary"
@@ -13,15 +14,16 @@
             text
             tile
         >
-      <div class="d-flex">
-          <v-text-field class="mr-2 " placeholder="请输入职位名称" outlined clearable ></v-text-field>
 
-          <v-btn dark x-large > SEARCH </v-btn>
-      </div>
+            <div class="d-flex">
+              <v-text-field class="mr-2" v-model="job" :error-messages="jobErrors" filled placeholder="请输入职位名称" outlined clearable></v-text-field>
+              <v-btn dark x-large @click="getScrapeInfo"> SEARCH</v-btn>
+            </div>
 
         </v-alert>
       </v-col>
 
+<!--      搜索结果-->
       <v-col cols="12" md="10" class="mb-md-4 mb-sm-3 mb-2">
         <v-card-title class="bg-primary pb-6">
           <v-text-field
@@ -49,14 +51,14 @@
         </v-data-table>
       </v-col>
 
+<!--      数据分析可视化-->
       <v-col cols="12" md="10" class="mb-md-4 mb-sm-3 mb-2">
         <template>
           <v-card>
             <v-row>
-
               <v-col :cols="2">
-                <v-tabs v-model="tab" background-color="primary" dark vertical>
-                  <v-tab v-for="item in items" :key="item.tab">
+                <v-tabs v-model="tab" background-color="primary" dark vertical >
+                  <v-tab v-for="item in items" :key="item.tab" >
                     {{ item.tab }}
                   </v-tab>
                 </v-tabs>
@@ -66,27 +68,29 @@
                 <v-tabs-items v-model="tab">
                   <v-tab-item v-for="item in items" :key="item.tab">
                     <v-card flat>
-                      <v-img
-                          class="fill-height"
-                          max-height="450"
-                          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                          @click="toggleFullscreen('https://cdn.vuetifyjs.com/images/cards/docks.jpg')"
-                          cover
-                      >
-                        <div v-if="selectedImage" class="overlay">
-                          <v-img
-                              class="mt-12"
-                              :src="selectedImage"
-                              alt=""
-                              height="95vh"
-                              contain
-                              dark
-                              @click.stop="selectedImage = null"
-                          >
-                          </v-img>
+                      <div style="height:200px;">
+                      <v-chart :option="item.content" autoresize  />
                         </div>
-                      </v-img>
-<!--                      <v-card-text>{{ item.content }}</v-card-text>-->
+<!--                      <v-img-->
+<!--                          class="fill-height"-->
+<!--                          max-height="450"-->
+<!--                          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"-->
+<!--                          @click="toggleFullscreen('https://cdn.vuetifyjs.com/images/cards/docks.jpg')"-->
+<!--                          cover-->
+<!--                      >-->
+<!--                        <div v-if="selectedImage" class="overlay">-->
+<!--                          <v-img-->
+<!--                              class="mt-12"-->
+<!--                              :src="selectedImage"-->
+<!--                              alt=""-->
+<!--                              height="95vh"-->
+<!--                              contain-->
+<!--                              dark-->
+<!--                              @click.stop="selectedImage = null"-->
+<!--                          >-->
+<!--                          </v-img>-->
+<!--                        </div>-->
+<!--                      </v-img>-->
                     </v-card>
                   </v-tab-item>
                 </v-tabs-items>
@@ -103,7 +107,8 @@
 
 <script>
 import prism from 'prismjs'
-
+import {maxLength, required} from "vuelidate/lib/validators";
+import { validationMixin } from 'vuelidate'
 export default {
   name: 'Prism',
   mounted() {
@@ -220,29 +225,87 @@ export default {
         },
       ],
       tab: null,
+      option_column: {
+        title: { text: "Column Chart" },
+        tooltip: {},
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [5, 20, 36, 10, 10, 20],
+          },
+        ],
+      },
       items: [
-        { tab: 'One', content: 'Tab 1 Content' },
-        { tab: 'Two', content: 'Tab 2 Content' },
-        { tab: 'Three', content: 'Tab 3 Content' },
-        { tab: 'Four', content: 'Tab 4 Content' },
-        { tab: 'Five', content: 'Tab 5 Content' },
-        { tab: 'Six', content: 'Tab 6 Content' },
-        { tab: 'Seven', content: 'Tab 7 Content' },
-        { tab: 'Eight', content: 'Tab 8 Content' },
-        { tab: 'Nine', content: 'Tab 9 Content' },
-        { tab: 'Ten', content: 'Tab 10 Content' },
+        { tab: 'One', content:{
+        title: { text: "Column Chart" },
+        tooltip: {},
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [5, 20, 36, 10, 10, 20],
+          },
+        ],
+      }},
+        { tab: 'Two', content: this.option_column },
+        { tab: 'Three', content: this.option_column },
+        { tab: 'Four', content: this.option_column },
+        { tab: 'Five', content: this.option_column },
+        { tab: 'Six', content: this.option_column },
+        { tab: 'Seven', content: this.option_column },
+        { tab: 'Eight', content: this.option_column },
+        { tab: 'Nine', content: this.option_column },
+        { tab: 'Ten', content: this.option_column },
       ],
+      job:'',
     };
   },
+  mixins: [validationMixin],
+  validations: {
+        job: { required, maxLength: maxLength(10) }
+    },
+  computed: {
+    jobErrors() {
+      const err = [];
+      if (!this.$v.job.$dirty) return err;
+      !this.$v.job.required && err.push('请填写工作名称')
+      !this.$v.job.maxLength && err.push('工作名称长度不能大于10')
+      return err
+    },
+
+  },
   methods: {
-    getScrapeInfo: function (jobName) {
-      var url = "127.0.0.1/scrape/?" + jobName
-      url
+    getScrapeInfo() {
+      // var url = "127.0.0.1/scrape/?" + jobName
+      // url
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.$axios.get('http://127.0.0.1:5000/test', {params:{'name':this.job}}).then(res=>{
+          console.log(res.data);
+          this.desserts = res.data
+        });
+        //alert(this.job)
+      }
+      // if(this.job == null || this.job == ''){
+      //     alert("null!")
+      // }else{
+      //
+      // }
     },
     toggleFullscreen(elem) {
       this.selectedImage = elem;
-    },
-  }
+    }
+  },
+
 }
 </script>
 <style>
@@ -262,7 +325,6 @@ export default {
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
-
 .v-tab {
     max-width: 100% !important;
     /*width: 90px;*/
