@@ -68,7 +68,7 @@
                 <v-tabs-items v-model="tab">
                   <v-tab-item v-for="item in items" :key="item.tab">
                     <v-card flat>
-                      <div style="height:200px;">
+                      <div style="height:450px;">
                       <v-chart :option="item.content" autoresize  />
                         </div>
 <!--                      <v-img-->
@@ -241,31 +241,23 @@ export default {
         ],
       },
       items: [
-        { tab: 'One', content:{
-        title: { text: "Column Chart" },
-        tooltip: {},
-        xAxis: {
-          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-        },
-        yAxis: {},
-        series: [
-          {
-            name: "销量",
-            type: "bar",
-            data: [5, 20, 36, 10, 10, 20],
-          },
-        ],
-      }},
-        { tab: 'Two', content: this.option_column },
-        { tab: 'Three', content: this.option_column },
-        { tab: 'Four', content: this.option_column },
-        { tab: 'Five', content: this.option_column },
-        { tab: 'Six', content: this.option_column },
-        { tab: 'Seven', content: this.option_column },
-        { tab: 'Eight', content: this.option_column },
-        { tab: 'Nine', content: this.option_column },
-        { tab: 'Ten', content: this.option_column },
+        { tab: 'One', content:null},
+        { tab: 'Two', content: null },
+        { tab: 'Three', content: null },
+        { tab: 'Four', content: null },
+        { tab: 'Five', content: null },
+        { tab: 'Six', content: null },
+        { tab: 'Seven', content: null },
+        { tab: 'Eight', content: null },
+        { tab: 'Nine', content: null },
+        { tab: 'Ten', content: null },
       ],
+
+      cityDemand:[],//城市人才需求量
+      salary:[],//职位工资水平
+      citySalary:[],//城市工资水平
+      expRequired:[],//经验要求
+      eduRequired:[],//学历要求
       job:'',
     };
   },
@@ -281,7 +273,6 @@ export default {
       !this.$v.job.maxLength && err.push('工作名称长度不能大于10')
       return err
     },
-
   },
   methods: {
     getScrapeInfo() {
@@ -289,10 +280,11 @@ export default {
       // url
       this.$v.$touch()
       if (!this.$v.$invalid) {
-        this.$axios.get('http://127.0.0.1:5000/test', {params:{'name':this.job}}).then(res=>{
-          console.log(res.data);
-          this.desserts = res.data
-        });
+        this.setOption()
+        // this.$axios.get('http://127.0.0.1:5000/test', {params:{'name':this.job}}).then(res=>{
+        //   console.log(res.data);
+        //   this.desserts = res.data
+        // });
         //alert(this.job)
       }
       // if(this.job == null || this.job == ''){
@@ -300,6 +292,12 @@ export default {
       // }else{
       //
       // }
+    },
+    setOption(){
+      this.items.forEach(item=>{
+        item.content=this.option_column
+          }
+      );
     },
     toggleFullscreen(elem) {
       this.selectedImage = elem;
