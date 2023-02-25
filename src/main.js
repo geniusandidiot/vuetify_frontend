@@ -6,10 +6,19 @@ import store from './store'
 import axios from 'axios'
 import VueClipboard from 'vue-clipboard2'
 import motion from './plugins/motion'
-
-import 'echarts'
+import * as echarts from 'echarts';
+import 'echarts/lib/chart/line'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/legend'
 import ECharts from 'vue-echarts'
+
+this.$echarts.registerMap('china', chinaJson);
+
 Vue.component('v-chart', ECharts);
+
+Vue.prototype.$echarts = echarts;
 
 axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios

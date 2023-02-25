@@ -106,9 +106,12 @@
 </template>
 
 <script>
-import prism from 'prismjs'
+import prism from 'prismjs';
 import {maxLength, required} from "vuelidate/lib/validators";
-import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate';
+import * as echarts from 'echarts';
+import chinaJson from '/src/echarts/echarts-4.2.1-rc1-map/json/china.json';
+echarts.registerMap('china', chinaJson);
 export default {
   name: 'Prism',
   mounted() {
@@ -226,20 +229,147 @@ export default {
       ],
       tab: null,
       option_column: {
-        title: { text: "Column Chart" },
-        tooltip: {},
-        xAxis: {
-          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        title: {
+          text: 'iphone销量',
+          subtext: '纯属虚构',
+          left: 'center'
         },
-        yAxis: {},
-        series: [
-          {
-            name: "销量",
-            type: "bar",
-            data: [5, 20, 36, 10, 10, 20],
-          },
-        ],
-      },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['iphone3', 'iphone4', 'iphone5']
+        },
+        visualMap: {
+          min: 0,
+          max: 2500,
+          left: 'left',
+          top: 'bottom',
+          text: ['高', '低'],           // 文本，默认为数值文本
+          calculable: true
+        },
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
+          feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+    series: [
+        {
+            name: 'iphone3',
+            type: 'map',
+            mapType: 'china',
+            roam: false,
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data:[
+                {name: '北京',value: 13 },
+                {name: '天津',value: 13 },
+                {name: '上海',value: 13 },
+                {name: '重庆',value: 13 },
+                {name: '河北',value: 13 },
+                {name: '河南',value: 13 },
+                {name: '云南',value: 13 },
+                {name: '辽宁',value: 13 },
+                {name: '黑龙江',value: 13 },
+                {name: '湖南',value: 13 },
+                {name: '安徽',value: 13 },
+                {name: '山东',value: 13 },
+                {name: '新疆',value: 13 },
+                {name: '江苏',value: 13 },
+                {name: '浙江',value: 13 },
+                {name: '江西',value: 13 },
+                {name: '湖北',value: 13 },
+                {name: '广西',value: 13 },
+                {name: '甘肃',value: 13 },
+                {name: '山西',value: 13 },
+                {name: '内蒙古',value: 13 },
+                {name: '陕西',value: 13 },
+                {name: '吉林',value: 13 },
+                {name: '福建',value: 13 },
+                {name: '贵州',value: 13 },
+                {name: '广东',value: 13 },
+                {name: '青海',value: 13 },
+                {name: '西藏',value: 13 },
+                {name: '四川',value: 13 },
+                {name: '宁夏',value: 13 },
+                {name: '海南',value: 13 },
+                {name: '台湾',value: 13 },
+                {name: '香港',value: 13 },
+                {name: '澳门',value: 13 }
+            ]
+        },
+        {
+            name: 'iphone4',
+            type: 'map',
+            mapType: 'china',
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data:[
+                {name: '北京',value: 13 },
+                {name: '天津',value: 13 },
+                {name: '上海',value: 13 },
+                {name: '重庆',value: 13 },
+                {name: '河北',value: 13 },
+                {name: '安徽',value: 13 },
+                {name: '新疆',value: 13 },
+                {name: '浙江',value: 13 },
+                {name: '江西',value: 13 },
+                {name: '山西',value: 13 },
+                {name: '内蒙古',value: 13 },
+                {name: '吉林',value: 13 },
+                {name: '福建',value: 13 },
+                {name: '广东',value: 13 },
+                {name: '西藏',value: 13 },
+                {name: '四川',value: 13 },
+                {name: '宁夏',value: 13 },
+                {name: '香港',value: 13 },
+                {name: '澳门',value: 13 }
+            ]
+        },
+        {
+            name: 'iphone5',
+            type: 'map',
+            mapType: 'china',
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data:[
+                {name: '北京',value: 13 },
+                {name: '天津',value: 13 },
+                {name: '上海',value: 13 },
+                {name: '广东',value: 13 },
+                {name: '台湾',value: 13 },
+                {name: '香港',value: 13 },
+                {name: '澳门',value: 13 }
+            ]
+        }
+    ]
+},
       items: [
         { tab: 'One', content:null},
         { tab: 'Two', content: null },
