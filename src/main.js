@@ -14,8 +14,6 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import ECharts from 'vue-echarts'
 
-this.$echarts.registerMap('china', chinaJson);
-
 Vue.component('v-chart', ECharts);
 
 Vue.prototype.$echarts = echarts;
