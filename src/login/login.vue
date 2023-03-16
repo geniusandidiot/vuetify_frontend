@@ -105,11 +105,21 @@ export default {
         submit() {
             this.$v.$touch()
             if(!this.$v.$invalid) {
-                this.loading = true
-                setTimeout(() => {
-                    this.loading = false
-                    this.$router.push('/plugin/prism')
-                }, 1500);
+               this.loading = true
+              // this.$axios.post("/xxx/login", {user: this.account, pwd: this.password})
+              //     .then(data => {
+              //       if (data.data.status != 200) {
+              //         this.loading = false
+              //         //iViewUi的友好提示
+              //         this.$Message.error(data.data.message);
+              //       }else{
+              //         setTimeout(() => {
+              //           this.loading = false
+              //           this.$router.push('/plugin/prism')
+              //         }, 1500);
+              //       }
+              //     });
+
             }
         }
     }

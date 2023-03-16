@@ -8,7 +8,10 @@ const router = new Router({
     routes: [{
         path: '/login',
         name: 'Login',
-        component: () => import('@/login/login')
+        component: () => import('@/login/login'),
+        meta:{
+        needLogin: false
+      }
     }, {
         path: '/home',
         name: 'Home',
@@ -18,17 +21,17 @@ const router = new Router({
             path: '/plugin/prism',
             name: 'Prism',
             component: () => import('@/views/plugin/prism'),
-            meta: '搜索'
+            meta: '搜索',needLogin: false
         }, {
             path: '/plugin/icons',
             name: 'Icons',
             component: () => import('@/views/plugin/icons'),
-            meta: '材质图标'
+            meta: '材质图标',needLogin: false
         }, {
             path: '/bulb/motion',
             name: 'Motion',
             component: () => import('@/views/bulb/motion'),
-            meta: '个人信息'
+            meta: '个人信息',needLogin: true
         }]
     }, {
         path: '*',
